@@ -92,6 +92,15 @@ namespace TravBotSharp.Files.Models.AccModels
             {
                 task = new RandomTask();
             }
+            else if (50000 < acc.AccInfo.ServerSpeed)
+            {
+                task = new TrainExchangeRes()
+                {
+                    Troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero,
+                    Vill = acc.Villages[0],
+                    HighSpeedServer = true
+                };
+            }
 
             if (task != null)
             {

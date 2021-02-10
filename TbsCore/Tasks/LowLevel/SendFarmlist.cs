@@ -33,11 +33,11 @@ namespace TravBotSharp.Files.Tasks.LowLevel
 
             if (acc.Farming.TrainTroopsAfterFL) // For TTWars servers
             {
-                TaskExecutor.AddTask(acc, new TrainTroops()
-                {
-                    ExecuteAt = DateTime.Now.AddSeconds(2),
+                TaskExecutor.AddTask(acc, new TrainExchangeRes() 
+                { 
+                    ExecuteAt = DateTime.Now.AddSeconds(1),
                     Troop = Vill.Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero,
-                    Vill = this.Vill,
+                    Vill = Vill,
                     HighSpeedServer = true
                 });
             }

@@ -6,23 +6,18 @@ using TravBotSharp.Files.Helpers;
 
 namespace TravBotSharp.Files.Tasks.LowLevel
 {
-    public class TrainExchangeRes : UpdateDorf2
+    public class TrainExchangeRes : TrainTroops
     {
-        public bool Great { get; set; }
-        public Classificator.TroopsEnum troop { get; set; }
-
         public override async Task<TaskRes> Execute(Account acc)
         {
             var wb = acc.Wb.Driver;
             if (Vill == null) Vill = AccountHelper.GetMainVillage(acc);
 
-            await base.Execute(acc);
-
-            var building = TroopsHelper.GetTroopBuilding(troop, Great);
+            var building = TroopsHelper.GetTroopBuilding(Troop, Great);
             if (!await VillageHelper.EnterBuilding(acc, Vill, building))
                 return TaskRes.Executed;
 
-            var troopNode = acc.Wb.Html.DocumentNode.Descendants("img").FirstOrDefault(x => x.HasClass("u" + (int)troop));
+            var troopNode = acc.Wb.Html.DocumentNode.Descendants("img").FirstOrDefault(x => x.HasClass("u" + (int)Troop));
             while (!troopNode.HasClass("details")) troopNode = troopNode.ParentNode;
 
             //finding the correct "Exchange resources" button
@@ -38,6 +33,8 @@ namespace TravBotSharp.Files.Tasks.LowLevel
 
             await Task.Delay(AccountHelper.Delay());
             wb.ExecuteScript($"document.getElementById('npc_market_button').click()"); //Exchange resources button
+
+            await base.Execute(acc);
 
             return TaskRes.Executed;
         }

@@ -76,11 +76,11 @@ namespace TravBotSharp.Views
             var acc = GetSelectedAcc();
             int sec = 1;
             TaskExecutor.AddTask(acc, new TTWarsGetRes() { ExecuteAt = DateTime.Now.AddSeconds(sec) });
-            TaskExecutor.AddTask(acc, new TrainExchangeRes() { ExecuteAt = DateTime.Now.AddSeconds(sec + 5), troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero });
-            TaskExecutor.AddTask(acc, new TrainTroops()
+            TaskExecutor.AddTask(acc, new TrainExchangeRes()
             {
-                ExecuteAt = DateTime.Now.AddSeconds(sec + 11),
+                ExecuteAt = DateTime.Now.AddSeconds(1),
                 Troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero,
+                Vill = acc.Villages[0],
                 HighSpeedServer = true
             });
             TaskExecutor.AddTask(acc, new TTWarsGetAnimals() { ExecuteAt = DateTime.Now.AddSeconds(sec + 33) });
@@ -194,8 +194,13 @@ namespace TravBotSharp.Views
             var acc = GetSelectedAcc();
             int sec = 1;
             TaskExecutor.AddTask(acc, new TTWarsGetRes() { ExecuteAt = DateTime.Now.AddSeconds(sec) });
-            TaskExecutor.AddTask(acc, new TrainExchangeRes() { ExecuteAt = DateTime.Now.AddSeconds(sec + 5), troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero });
-            TaskExecutor.AddTask(acc, new TrainTroops() { ExecuteAt = DateTime.Now.AddSeconds(sec + 11), Troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero });
+            TaskExecutor.AddTask(acc, new TrainExchangeRes()
+            {
+                ExecuteAt = DateTime.Now.AddSeconds(1),
+                Troop = acc.Villages[0].Troops.TroopToTrain ?? Classificator.TroopsEnum.Hero,
+                Vill = acc.Villages[0],
+                HighSpeedServer = true
+            });
         }
 
         private void fillInAdvanceUpDown_ValueChanged(object sender, EventArgs e)
