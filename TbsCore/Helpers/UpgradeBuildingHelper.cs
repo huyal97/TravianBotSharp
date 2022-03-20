@@ -55,6 +55,12 @@ namespace TbsCore.Helpers
                 vill.Build.Tasks.Remove(task); //task has been completed
                 return NextBuildingTask(acc, vill);
             }
+            //if task is currently building
+            if (task.IsCurrentlyBuilding == true)
+            {
+                vill.Build.Tasks.Remove(task); //task has been completed
+                return NextBuildingTask(acc, vill);
+            }
 
             //if buildingId is not yet defined, find one.
             if (task.BuildingId == null && task.TaskType == BuildingType.General)

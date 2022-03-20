@@ -34,6 +34,8 @@ namespace TbsCore.Models.BuildingModels
         public ResTypeEnum ResourceType { get; set; }
 
         public BuildingStrategyEnum BuildingStrategy { get; set; }
+
+        public bool IsCurrentlyBuilding { get; set; }
     }
 }
 
